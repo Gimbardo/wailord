@@ -2,16 +2,16 @@ require 'rubocop/rake_task'
 
 task default: %w[lint test]
 
-task :run do
-  ruby 'lib/routes.rb'
+task :start do
+  sh 'puma' # -t 8:32 -w 3'
 end
 
 task :test do
-  ruby 'test/spotify_test.rb'
+  ruby 'test/*_test.rb'
 end
 
 
 RuboCop::RakeTask.new(:lint) do |task|
-  task.patterns = %w[lib/**/*.rb test/**/*.rb]
+  task.patterns = %w[lib/*.rb test/*.rb]
   task.fail_on_error = false
 end
